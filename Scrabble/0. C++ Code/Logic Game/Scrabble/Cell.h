@@ -21,6 +21,13 @@ typedef enum {
 class Cell
 {
 public:
+    Cell() { }
+    ScoreEffect getScoreEffect() { return m_scoreEffect; }
+    void setScoreEffect(ScoreEffect x) { m_scoreEffect = x; }
+    bool isEmpty() { return m_empty; }
+    void setEmpty(bool x) { m_empty = x; }
+    bool isTilePlayed() { return m_tilePlayed; }
+    void setTilePlayed(int x) { m_tilePlayed = x; }
 
 private:
     ScoreEffect m_scoreEffect;
