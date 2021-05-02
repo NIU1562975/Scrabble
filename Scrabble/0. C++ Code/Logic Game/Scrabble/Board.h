@@ -61,7 +61,8 @@ public:
     CurrentWordResult checkCurrentWord(int& points);
     void sendCurrentWordToBoard();
     void removeCurrentWord();
-    
+    void llegeixEffects(const string& nomFitxer);
+
         
 private:
     Cell m_cells[BOARD_COLS_AND_ROWS][BOARD_COLS_AND_ROWS];
