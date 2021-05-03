@@ -33,6 +33,10 @@ typedef enum {
     NOT_EMPTY
 } PositionResult;
 
+typedef enum {
+
+
+}
 typedef struct {
     int row;
     int col;
@@ -64,6 +68,8 @@ public:
     CurrentWordResult checkCurrentWord(int& points);
     void sendCurrentWordToBoard();
     void removeCurrentWord();
+    bool checkHorizontal();
+    bool checkVertical();
     void llegeixEffects(const string& nomFitxer);
 
     

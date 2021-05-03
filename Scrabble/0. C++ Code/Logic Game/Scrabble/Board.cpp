@@ -36,9 +36,17 @@ PositionResult Board::setTile(Tile& tile, const BoardPosition& boardPos)
 
 CurrentWordResult Board::checkCurrentWord(int& points)
 {
+	if(m_cells[7][7].isEmpty() == true)
+	{
 
+	}
 
 	return CurrentWordResult();
+}
+
+void Board::sendCurrentWordToBoard()
+{
+	
 }
 
 

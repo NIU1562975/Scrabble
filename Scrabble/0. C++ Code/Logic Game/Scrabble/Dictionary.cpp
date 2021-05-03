@@ -56,7 +56,7 @@ Dictionary::Dictionary(){
 	m_languagesPath[0]="$(ProjectDir)\..\..\1. Resources\data\Dictionaries\Catalan.dic";
 	m_languagesPath[1]="$(ProjectDir)\..\..\1. Resources\data\Dictionaries\Spanish.dic";
 	m_languagesPath[2]="$(ProjectDir)\..\..\1. Resources\data\Dictionaries\English.dic";
-	m_languagesPath[3]="No Language";
+	m_languagesPath[3]= NO_LANGUAGE;
 	m_currentLanguage = NO_LANGUAGE;
 }
 bool Dictionary::check(const string& word){
