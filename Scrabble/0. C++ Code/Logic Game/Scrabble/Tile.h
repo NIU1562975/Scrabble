@@ -9,7 +9,7 @@
 class Tile
 {
 public:
-    Tile() { }
+    Tile() { m_letter = ' '; m_score = 0; }
     char getLetter() { return m_letter; }
     void setLetter(char letter) { m_letter = letter; }
     unsigned int getScore() { return m_score; }

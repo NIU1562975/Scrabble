@@ -26,7 +26,7 @@ public:
 
 private:
 	vector<string> m_words;
-    string m_languagesPath[NO_LANGUAGE];
+    string m_languagesPath[NO_LANGUAGE]; 
     Language m_currentLanguage;
     
 };

@@ -10,6 +10,38 @@
 
 
 
+PositionResult Board::setTile(Tile& tile, const BoardPosition& boardPos)
+{
+	int col = boardPos.getCol();
+	int row = boardPos.getRow();
+	CellPosition cell;
+
+	if (m_cells[row][col].isEmpty() && row < 15 && col < 15)
+	{
+		m_cells[row][col].setEmpty(false);
+		m_cells[row][col].setTileLetter(tile.getLetter());
+		m_cells[row][col].setTileScore(tile.getScore());
+		cell.col = col;
+		cell.row = row;
+		paraulaMuntada.push_back(cell);
+		lletresDeParaula.push_back(tile);
+		return PositionResult(0);
+	}
+	else if (m_cells[row][col].isEmpty() && (row > 14 || col > 14)) 
+		return PositionResult(1);
+	else
+		return PositionResult(2);
+}
+
+
+CurrentWordResult Board::checkCurrentWord(int& points)
+{
+
+
+	return CurrentWordResult();
+}
+
+
 void Board::llegeixEffects(const string& nomFitxer)
 {
 	ifstream fitxer;
@@ -36,7 +68,7 @@ void Board::llegeixEffects(const string& nomFitxer)
 		else if (x == "DW")
 			effect = DW;
 		else if (x == "TW")
-			effect = DW;
+			effect = TW;
 		else if (x == "NO_EFFECT")
 			effect = NO_EFFECT;
 

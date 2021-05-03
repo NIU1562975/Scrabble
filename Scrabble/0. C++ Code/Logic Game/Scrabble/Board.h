@@ -33,6 +33,11 @@ typedef enum {
     NOT_EMPTY
 } PositionResult;
 
+typedef struct {
+    int row;
+    int col;
+} CellPosition;
+
 typedef enum {
     ALL_CORRECT = 0,
     //Tiles must be vertically or horizontally aligned and together
@@ -49,8 +54,6 @@ typedef enum {
 //-----------------------------
 
 
-
-
 class Board
 {
 public:
@@ -63,10 +66,12 @@ public:
     void removeCurrentWord();
     void llegeixEffects(const string& nomFitxer);
 
-        
-private:
+    
+private: 
     Cell m_cells[BOARD_COLS_AND_ROWS][BOARD_COLS_AND_ROWS];
     Dictionary m_dictionary;
+    vector<CellPosition> paraulaMuntada;
+    vector<Tile> lletresDeParaula;
     
 };
 
