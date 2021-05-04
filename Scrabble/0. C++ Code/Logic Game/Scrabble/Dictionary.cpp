@@ -22,13 +22,13 @@ void Dictionary::setLanguage(Language language)
 	switch (m_currentLanguage)
 	{
 	case 0:
-		fileName = "Catalan.dic";
+		fileName = "data/Dictionaries/Catalan.dic";
 		break;
 	case 1:
-		fileName = "Spanish.dic";
+		fileName = "data/Dictionaries/Spanish.dic";
 		break;
 	case 2:
-		fileName = "English.dic";
+		fileName = "data/Dictionaries/English.dic";
 		break;
 	case 3:
 		fileName = " ";
@@ -56,15 +56,17 @@ Dictionary::Dictionary(){
 	m_languagesPath[0]="$(ProjectDir)\..\..\1. Resources\data\Dictionaries\Catalan.dic";
 	m_languagesPath[1]="$(ProjectDir)\..\..\1. Resources\data\Dictionaries\Spanish.dic";
 	m_languagesPath[2]="$(ProjectDir)\..\..\1. Resources\data\Dictionaries\English.dic";
-	m_languagesPath[3]= NO_LANGUAGE;
 	m_currentLanguage = NO_LANGUAGE;
 }
+
 bool Dictionary::check(const string& word){
 	int i = 0;
 	bool trobat = false;
 	while (i < m_words.size() && trobat != true){
-		if(m_words[i] == word)
+		if (m_words[i] == word)
+		{
 			trobat = true;
+		}
 		i++;
 	}
 	return trobat;

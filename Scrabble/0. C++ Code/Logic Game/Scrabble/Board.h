@@ -16,6 +16,9 @@
 #include "Dictionary.h"
 #include "BoardPosition.h"
 
+#define HORITZONTAL 1
+#define VERTICAL 2
+#define NO_ALINEADES 0
 
 using namespace std;
 
@@ -33,21 +36,13 @@ typedef enum {
     NOT_EMPTY
 } PositionResult;
 
-typedef enum {
-
-
-}
-typedef struct {
-    int row;
-    int col;
-} CellPosition;
 
 typedef enum {
     ALL_CORRECT = 0,
     //Tiles must be vertically or horizontally aligned and together
     INVALID_NOT_ALIGNED,
     //At least one letter must be next to the rest of the words.
-    INVALID_NOT_CONNECTION,
+    INVALID_NOT_CONNECmTION,
     //You have to start using the center position
     INVALID_START_NOT_IN_CENTER,
     //Only words of two or more letters
@@ -68,17 +63,15 @@ public:
     CurrentWordResult checkCurrentWord(int& points);
     void sendCurrentWordToBoard();
     void removeCurrentWord();
-    bool checkHorizontal();
-    bool checkVertical();
-    void llegeixEffects(const string& nomFitxer);
+    void llegeixEffects();
+    int comprovaAlineacio();
+    bool checkDictionary();
+    bool Consecutivas(const int& alineacio);
 
-    
 private: 
     Cell m_cells[BOARD_COLS_AND_ROWS][BOARD_COLS_AND_ROWS];
     Dictionary m_dictionary;
-    vector<CellPosition> paraulaMuntada;
-    vector<Tile> lletresDeParaula;
-    
+    vector<BoardPosition> currentWord;    
 };
 
 #endif /* Board_hpp */

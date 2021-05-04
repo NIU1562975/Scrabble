@@ -21,7 +21,7 @@ typedef enum {
 class Cell
 {
 public:
-    Cell() : m_empty(1), m_tilePlayed(0) { m_scoreEffect = NO_EFFECT; };
+    Cell() {}
     ScoreEffect getScoreEffect() { return m_scoreEffect; }
     void setScoreEffect(ScoreEffect x) { m_scoreEffect = x; }
     bool isEmpty() { return m_empty; }
@@ -32,7 +32,7 @@ public:
     void setTileScore(int x) { m_tile.setScore(x); }
     char getTileLetter() { return m_tile.getLetter(); }
     int getTileScore() { return m_tile.getScore(); }
-
+    Tile getTile() { return m_tile; }
 
 private:
     ScoreEffect m_scoreEffect;
