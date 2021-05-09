@@ -46,7 +46,7 @@ Board::Board()
 			else
 				s = NO_EFFECT;
 
-			m_cells[fila[i]][columna[i]].setScoreEffect(s);
+			m_cells[columna[i]][fila[i]].setScoreEffect(s);
 		}
 
 		fitxer.close();
@@ -135,7 +135,7 @@ CurrentWordResult Board::checkCurrentWord(int& points)
 	{
 		return CurrentWordResult(1);
 	}
-	if (comprovaConexio(alineacio) == true && Consecutivas(alineacio)==false)
+	if (comprovaConexio(alineacio) == false && Consecutivas(alineacio)==false)
 	{
 		return CurrentWordResult(2);
 	}
@@ -147,12 +147,13 @@ CurrentWordResult Board::checkCurrentWord(int& points)
 		return CurrentWordResult(4);
 	}
 	buscarParaulesNoves(alineacio);
+	puntuacioParaules(points);
 	if (checkDictionary() == false)
 	{
 	return CurrentWordResult(5);
 	}
 
-	puntuacioParaules(points);
+	
 	return CurrentWordResult(0);
 
 }
@@ -310,7 +311,7 @@ bool Board::comprovaConexio(const int& alineacio) {
 	}
 }
 void Board::buscarParaulesNoves(const int& alineacio) {
-
+	newWords.resize(0);
 	vector<BoardPosition> newWord;
 	int j = 0;
 	int y = 0;
@@ -321,9 +322,7 @@ void Board::buscarParaulesNoves(const int& alineacio) {
 	switch (alineacio)
 	{
 	case HORITZONTAL:
-		
-		
-		while (m_cells[currentWord[0].getCol() + j][currentWord[0].getRow()].isEmpty() == false) {
+		while (m_cells[currentWord[0].getCol() + j][currentWord[0].getRow()].isEmpty() == false && currentWord[0].getCol()+j< BOARD_COLS_AND_ROWS) {
 			j++;
 		}
 		j = j + currentWord[0].getCol()-1;
@@ -423,14 +422,14 @@ void Board::buscarParaulesNoves(const int& alineacio) {
 }
 void Board::puntuacioParaules(int& points)
 {
-	
+	points = 0;
 	for (int i = 0; i < newWords.size(); i++)
 	{
 		int multiplicador = 1;
-		for (int j = 0; j = newWords[i].size(); i++)
+		for (int j = 0; j < newWords[i].size(); j++)
 		{
-			int row = newWords[j][i].getRow();
-			int col = newWords[j][i].getCol();
+			int row = newWords[i][j].getRow();
+			int col = newWords[i][j].getCol();
 
 			if (m_cells[col][row].isTilePlayed())
 			{
@@ -447,17 +446,21 @@ void Board::puntuacioParaules(int& points)
 					points += m_cells[col][row].getTileScore() * 3;
 					break;
 				case DW:
+					points += m_cells[col][row].getTileScore();
 					multiplicador *= 2;
 					break;
 				case TW:
+					points += m_cells[col][row].getTileScore();
 					multiplicador *= 3;
 					break;
 				default:
+					points += m_cells[col][row].getTileScore();
 					break;
 				}
 			}
-			points *= multiplicador;
+			
 		}
+		points *= multiplicador;
 	}
 }
 
@@ -493,7 +496,7 @@ void Board::removeCurrentWord()
 void Board::llegeixEffects()
 {
 	ifstream fitxer;
-	fitxer.open("data/Configuration/board.txt");
+	fitxer.open("./data/Configuration/board.txt");
 
 	int n_lines = 0;
 	string line;
@@ -520,7 +523,7 @@ void Board::llegeixEffects()
 		else if (x == "NO_EFFECT")
 			effect = NO_EFFECT;
 
-		m_cells[f][c].setScoreEffect(ScoreEffect(effect));
+		m_cells[c][f].setScoreEffect(ScoreEffect(effect));
 	}
 
 	fitxer.close();
