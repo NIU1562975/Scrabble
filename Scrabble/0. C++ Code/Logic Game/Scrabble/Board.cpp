@@ -332,6 +332,7 @@ void Board::buscarParaulesNoves(const int& alineacio) {
 		y = currentWord[0].getCol() - y + 1;
 		newWord.resize((j - y) + 1);
 		
+		//mirar fila entera
 		for (int x = 0; x < newWord.size(); x++)
 		{
 		
@@ -342,6 +343,7 @@ void Board::buscarParaulesNoves(const int& alineacio) {
 
 		newWords.push_back(newWord);
 
+		//mirar las columnas
 		for (int i = 0; i < currentWord.size(); i++) {
 			newWord.resize(0);
 			
@@ -363,8 +365,8 @@ void Board::buscarParaulesNoves(const int& alineacio) {
 				newWord[x].setRow(y);
 				y++;
 			}
-
-			newWords.push_back(newWord);
+			if(newWord.size()>=2)
+				newWords.push_back(newWord);
 
 			}
 
