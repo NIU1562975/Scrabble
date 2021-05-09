@@ -207,7 +207,7 @@ float test_1_EstatDeCasella(map<char,Tile>& tiles)
     comparePositionResults(result, valid_result, 1, reduccio);
     
     
-    cout << "Comment :=>> 1.4 Inserint dos cops en mateixa posició vàlida:" <<  endl;
+    cout << "Comment :=>> 1.4 Inserint dos cops en mateixa posicio valida:" <<  endl;
     cout << "Comment :=>> -----------------------------------------------" << endl;
     cout << "Comment :=>> Inserint a posicio: (3,3)" << endl;
     result = board.setTile(tiles['a'], BoardPosition(4,4));

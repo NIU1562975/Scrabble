@@ -18,7 +18,7 @@ class Dictionary
 {
 public:
     Dictionary();
-    ~Dictionary();
+    ~Dictionary() {}
 
     void setLanguage(Language language);
     Language getCurrentLanguage() { return m_currentLanguage; }

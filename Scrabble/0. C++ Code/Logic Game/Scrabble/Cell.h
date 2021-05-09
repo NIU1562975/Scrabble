@@ -21,7 +21,7 @@ typedef enum {
 class Cell
 {
 public:
-    Cell() {}
+    Cell();
     ScoreEffect getScoreEffect() { return m_scoreEffect; }
     void setScoreEffect(ScoreEffect x) { m_scoreEffect = x; }
     bool isEmpty() { return m_empty; }

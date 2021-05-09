@@ -22,13 +22,13 @@ void Dictionary::setLanguage(Language language)
 	switch (m_currentLanguage)
 	{
 	case 0:
-		fileName = "data/Dictionaries/Catalan.dic";
+		fileName = "./data/Dictionaries/Catalan.dic";
 		break;
 	case 1:
-		fileName = "data/Dictionaries/Spanish.dic";
+		fileName = "./data/Dictionaries/Spanish.dic";
 		break;
 	case 2:
-		fileName = "data/Dictionaries/English.dic";
+		fileName = "./data/Dictionaries/English.dic";
 		break;
 	case 3:
 		fileName = " ";
@@ -52,10 +52,10 @@ void Dictionary::setLanguage(Language language)
 }
 
 Dictionary::Dictionary(){
-	m_words.push_back(0);
-	m_languagesPath[0]="$(ProjectDir)\..\..\1. Resources\data\Dictionaries\Catalan.dic";
-	m_languagesPath[1]="$(ProjectDir)\..\..\1. Resources\data\Dictionaries\Spanish.dic";
-	m_languagesPath[2]="$(ProjectDir)\..\..\1. Resources\data\Dictionaries\English.dic";
+	m_words.push_back(" ");
+	m_languagesPath[0]=".\data\Dictionaries\Catalan.dic";
+	m_languagesPath[1]=".\data\Dictionaries\Spanish.dic";
+	m_languagesPath[2]=".\data\Dictionaries\English.dic";
 	m_currentLanguage = NO_LANGUAGE;
 }
 

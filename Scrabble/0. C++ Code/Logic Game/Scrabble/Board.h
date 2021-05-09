@@ -42,7 +42,7 @@ typedef enum {
     //Tiles must be vertically or horizontally aligned and together
     INVALID_NOT_ALIGNED,
     //At least one letter must be next to the rest of the words.
-    INVALID_NOT_CONNECmTION,
+    INVALID_NOT_CONNECTION,
     //You have to start using the center position
     INVALID_START_NOT_IN_CENTER,
     //Only words of two or more letters
@@ -57,7 +57,7 @@ class Board
 {
 public:
     Board();
-    ~Board();
+    ~Board() {}
      
     PositionResult setTile(Tile &tile, const BoardPosition& boardPos);
     CurrentWordResult checkCurrentWord(int& points);
@@ -67,11 +67,15 @@ public:
     int comprovaAlineacio();
     bool checkDictionary();
     bool Consecutivas(const int& alineacio);
+    bool comprovaConexio(const int& alineacio);
+    void buscarParaulesNoves(const int& alineacio);
+    void puntuacioParaules(int& points);
 
 private: 
     Cell m_cells[BOARD_COLS_AND_ROWS][BOARD_COLS_AND_ROWS];
     Dictionary m_dictionary;
     vector<BoardPosition> currentWord;    
+    vector<vector<BoardPosition>> newWords;
 };
 
 #endif /* Board_hpp */
