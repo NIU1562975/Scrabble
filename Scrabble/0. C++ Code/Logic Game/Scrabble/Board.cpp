@@ -74,6 +74,8 @@ PositionResult Board::setTile(Tile& tile, const BoardPosition& boardPos)
 	else
 		return PositionResult(2);
 }
+
+/*
 bool Board::checkDictionary()
 {
 	string paraula;
@@ -98,8 +100,28 @@ bool Board::checkDictionary()
 
 	return trobat;
 }
+*/
 
+bool Board::checkDictionary()
+{
+	string paraula;
+	int sizeVector = currentWord.size();
+	bool trobat = false;
 
+	paraula.resize(sizeVector);
+
+	for (int i = 0; i < sizeVector; i++)
+	{
+		int row = currentWord[i].getRow();
+		int col = currentWord[i].getCol();
+
+		char c = m_cells[row][col].getTileLetter();
+
+		paraula.append(i, c);
+	}
+
+	return m_dictionary.check(paraula);
+}
 
 CurrentWordResult Board::checkCurrentWord(int& points)
 {
@@ -107,7 +129,7 @@ CurrentWordResult Board::checkCurrentWord(int& points)
 
 	
 	alineacio = comprovaAlineacio();
-	buscarParaulesNoves(alineacio);
+	
 
 	if (alineacio == 0)
 	{
@@ -124,6 +146,7 @@ CurrentWordResult Board::checkCurrentWord(int& points)
 	if (currentWord.size() < 2) {
 		return CurrentWordResult(4);
 	}
+	buscarParaulesNoves(alineacio);
 	if (checkDictionary() == false)
 	{
 	return CurrentWordResult(5);
@@ -303,17 +326,19 @@ void Board::buscarParaulesNoves(const int& alineacio) {
 		while (m_cells[currentWord[0].getCol() + j][currentWord[0].getRow()].isEmpty() == false) {
 			j++;
 		}
-		
+		j = j + currentWord[0].getCol()-1;
 		while (m_cells[currentWord[0].getCol() - y][currentWord[0].getRow()].isEmpty() == false) {
 			y++;
 		}
-		newWord.resize((j - y) + 1 + currentWord[0].getCol());
-		y = currentWord[0].getCol() - y;
+		y = currentWord[0].getCol() - y + 1;
+		newWord.resize((j - y) + 1);
+		
 		for (int x = 0; x < newWord.size(); x++)
 		{
-			y--;
+		
 			newWord[x].setRow(currentWord[0].getRow());
 			newWord[x].setCol(y);
+			y++;
 		}
 
 		newWords.push_back(newWord);
@@ -325,16 +350,19 @@ void Board::buscarParaulesNoves(const int& alineacio) {
 			while (m_cells[currentWord[i].getCol()][currentWord[i].getRow() - j].isEmpty() == false) {
 				j++;
 			}
+			j = currentWord[i].getRow() - j + 1;
 			int y = 0;
 			while (m_cells[currentWord[i].getCol()][currentWord[i].getRow() + y].isEmpty() == false) {
 				y++;
 			}
+			y = y + currentWord[i].getRow() - 1;
 			newWord.resize((j - y) + 1);
 			for (int x = 0; x < newWord.size(); x++)
 			{
-				y--;
+				
 				newWord[x].setCol(currentWord[0].getCol());
 				newWord[x].setRow(y);
+				y++;
 			}
 
 			newWords.push_back(newWord);
@@ -348,17 +376,18 @@ void Board::buscarParaulesNoves(const int& alineacio) {
 		while (m_cells[currentWord[0].getCol()][currentWord[0].getRow() - w].isEmpty() == false) {
 			w++;
 		}
-		
+		w =  currentWord[0].getRow() - w + 1;
 		while (m_cells[currentWord[0].getCol()][currentWord[0].getRow() + k].isEmpty() == false) {
 			k++;
 		}
-		mida = (w - k) + 1+currentWord[0].getRow();
-		newWord.resize(mida);
+		k = k + currentWord[0].getRow() - 1;
+	
+		newWord.resize((k - w) + 1);
 		for (int x = 0; x < newWord.size(); x++)
 		{
-			k--;
 			newWord[x].setCol(currentWord[0].getCol());
 			newWord[x].setRow(k);
+				k++;
 		}
 
 		newWords.push_back(newWord);
@@ -370,18 +399,20 @@ void Board::buscarParaulesNoves(const int& alineacio) {
 			while (m_cells[currentWord[i].getCol() + j][currentWord[i].getRow()].isEmpty() == false) {
 				j++;
 			}
+			j = j + currentWord[i].getCol()-1;
 			int y = 0;
 			while (m_cells[currentWord[i].getCol() - y][currentWord[i].getRow()].isEmpty() == false) {
 				y++;
 			}
+			y = currentWord[i].getCol() - y +1;
 
-
-			newWord.resize((j - y) + 1+currentWord[i].getCol());
+			newWord.resize((j - y) + 1);
 			for (int x = 0; x < newWord.size(); x++)
 			{
-				y--;
+				
 				newWord[x].setRow(currentWord[0].getRow());
 				newWord[x].setCol(y);
+				y++;
 			}
 
 			newWords.push_back(newWord);
